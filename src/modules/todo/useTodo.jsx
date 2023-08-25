@@ -1,20 +1,19 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import todoService from "../../services/todo-service";
 
 export default function useTodo() {
   const [todoList, setTodoList] = useState([]);
+  const inputRef = useRef();
 
-  useEffect(async () => {
-    // const controller = new AbortController();
-
-    const res = await todoService.getAll();
-    // setTodoList(() => res.data);
-    console.log(res);
-
+  useEffect(() => {
+    const controller = new AbortController();
+    todoService.getAll({ signal: controller.signal }).then((res) => {
+      setTodoList((prev) => res.data.todos);
+    });
     return () => {
-      //   controller.abort();
+      controller.abort();
     };
   }, []);
 
-  return { todoList, setTodoList };
+  return { todoList, setTodoList, inputRef };
 }

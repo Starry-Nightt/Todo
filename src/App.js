@@ -1,8 +1,8 @@
 import "./App.scss";
-import Todo from "./modules/todo";
+import TodoApp from "./modules/todo-app/todo-app";
 
 function App() {
-  return <Todo />;
+  return <TodoApp />;
 }
 
 export default App;

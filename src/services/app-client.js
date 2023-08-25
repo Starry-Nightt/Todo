@@ -3,7 +3,7 @@ import axios from "axios";
 class AppClient {
   appClient = axios.create({
     baseURL: "https://dummyjson.com",
-    timeout: 1000,
+    timeout: 3000,
   });
 
   get(url, params = {}, config = {}) {
@@ -24,4 +24,6 @@ class AppClient {
   }
 }
 
-export default new AppClient();
+const appClient = new AppClient();
+
+export default appClient;
